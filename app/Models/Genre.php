@@ -20,5 +20,4 @@ class Genre extends Model
             'book_id'
         );
     }
-
 }
