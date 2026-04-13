@@ -10,7 +10,7 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/search', [BookController::class, 'index']);
+Route::get('/search', [BookController::class, 'index'])->name('search');
 
 Route::post('/search', [BookController::class, 'search']);
 
@@ -22,6 +22,7 @@ Route::get('/random-book', [BookController::class, 'random'])->name('random.book
 
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/register', [RegisterController::class, 'register'])->name('register.form');
 Route::post('/register', [RegisterController::class, 'accCreate'])->name('register');
