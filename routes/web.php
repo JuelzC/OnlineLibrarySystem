@@ -9,6 +9,10 @@ use App\Http\Controllers\AuthController;
 Route::get('/', function () {
     return view('home');
 });
+use App\Http\Controllers\MangaRequestController;
+
+Route::get('/request-manga', [MangaRequestController::class, 'index']);
+Route::post('/request-manga', [MangaRequestController::class, 'store']);
 
 Route::get('/search', [BookController::class, 'index'])->name('search');
 
