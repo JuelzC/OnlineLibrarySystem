@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Book Management System</title>
 
     <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -48,12 +53,10 @@
         }
 
         .content {
-            padding: 40px;
             min-height: 70vh;
         }
 
         .card {
-            background: white;
             padding: 25px;
             border-radius: 8px;
             flex-direction: column;
@@ -67,8 +70,8 @@
             padding: 20px;
         }
     </style>
+    @yield('styles')
 </head>
-<body>
 
 <header>
     <div class="logo">Manga<span>Verse</span></div>
@@ -98,5 +101,4 @@
     <p>filler</p>
 </footer>
 
-</body>
 </html>

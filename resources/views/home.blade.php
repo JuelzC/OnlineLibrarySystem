@@ -1,10 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MangaVerse</title>
-</head>
+@extends('app')
+
+@section('styles')
 <style>
 * {
     margin: 0;
@@ -14,18 +10,10 @@
 }
 
 body {
-    background-color: #111;
+    background-color: black;
     color: white;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 40px;
-    background-color: #1a1a1a;
-    border-bottom: 2px solid #222;
-}
 
 .logo {
     font-size: 24px;
@@ -35,18 +23,6 @@ header {
 .logo span {
     color: crimson;
 }
-
-nav a {
-    color: white;
-    text-decoration: none;
-    margin-left: 20px;
-    transition: 0.3s;
-}
-
-nav a:hover {
-    color: crimson;
-}
-
 
 .hero {
     text-align: center;
@@ -62,6 +38,7 @@ nav a:hover {
 
 .section {
     padding: 40px;
+    background-color: black;
 }
 
 .section h2 {
@@ -89,11 +66,13 @@ nav a:hover {
     width: 100%;
     height: 250px;
     object-fit: cover;
+    display: block;
 }
 
 .card h3 {
     padding: 10px;
     font-size: 14px;
+    color: white;
 }
 
 .card:hover {
@@ -101,30 +80,49 @@ nav a:hover {
     box-shadow: 0 0 15px crimson;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #1a1a1a;
-    margin-to
-}
 .empty-message {
     color: #888;
     padding: 20px;
     font-size: 14px;
 }
+
+#flash-message {
+    position: fixed;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    background-color: #28a745;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 8px;
+    
+    z-index: 9999;
+    transition: opacity 1s ease;
+}
+
 </style>
-<body>
-    <header>
-    <div class="logo">Manga<span>Verse</span></div>
-    <nav>
-        <a href="#">Home</a>
-        <a href="#">Search</a>
-        <a href="#">New Manga</a>
-        <a href="#">Recent Chapters</a>
-    </nav>
+
+@if(session('success'))
+    <div id="flash-message">
+        {{ session('success') }}
+    </div>
+
+    <script>
+        setTimeout(() => {
+            document.getElementById('flash-message').style.opacity = '0';
+        }, 2000); // start fading after 2 seconds
+
+        setTimeout(() => {
+            document.getElementById('flash-message').remove();
+        }, 3000); // remove after 3 seconds
+    </script>
+@endif
+
+@section('content')
+<header>
+
 </header>
-
-
 <section class="hero">
     <h1>Read Manga Online</h1>
     <p>Discover the latest and greatest manga chapters.</p>
@@ -134,20 +132,26 @@ footer {
     <div class="card-container">
 
         <?php
-        $featured = []; 
+        $featured = [
+    [
+        'title' => 'BlackJack Volume 1 Chapter 1',
+        'image' => asset('images/BlackJackVolume1Chapter1/1.jpeg'),
+        'url' => route('BlackJackVolume1Chapter1')
+    ]
+];
 
-        if (!empty($featured)) {
-            foreach ($featured as $manga) {
-                echo "
-                <div class='card'>
-                    <img src='{$manga['image']}' alt='Manga'>
-                    <h3>{$manga['title']}</h3>
-                </div>
-                ";
-            }
-        } else {
-            echo "<p class='empty-message'>No featured manga available.</p>";
-        }
+if (!empty($featured)) {
+    foreach ($featured as $manga) {
+        echo "
+        <a href='{$manga['url']}' class='card'>
+            <img src='{$manga['image']}' alt='Manga'>
+            <h3>{$manga['title']}</h3>
+        </a>
+        ";
+    }
+} else {
+    echo "<p class='empty-message'>No featured manga available.</p>";
+}
         ?>
 
     </div>
@@ -175,8 +179,5 @@ footer {
 
     </div>
 </section>
-<footer>
-    <p>© <?php echo date("Y"); ?> MangaVerse. All Rights Reserved.</p>
-</footer>
-</body>
+@endsection
 </html>
