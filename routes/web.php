@@ -34,3 +34,8 @@ Route::post('/register', [RegisterController::class, 'accCreate'])->name('regist
 
 Route::get('/BlackJackVolume1Chapter1', function () {
     return app(PagesController::class)->showChapter(4); })->name('BlackJackVolume1Chapter1');
+
+
+Route::get('/blackjack', function () {
+    return view('BlackJack');
+    })->name('blackjack.page');

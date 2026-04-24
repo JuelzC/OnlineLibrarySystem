@@ -136,7 +136,7 @@ body {
     [
         'title' => 'BlackJack Volume 1 Chapter 1',
         'image' => asset('images/BlackJackVolume1Chapter1/1.jpeg'),
-        'url' => route('BlackJackVolume1Chapter1')
+        'url' => route('blackjack.page')
     ]
 ];
 

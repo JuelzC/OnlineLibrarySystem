@@ -92,10 +92,9 @@
         @endguest
     </div>
 </header>
-
-<div class="content">
+<body style="margin:0;">
     @yield('content')
-</div>
+</body>
 
 <footer>
     <p>filler</p>
