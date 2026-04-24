@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Book Management System</title>
 
     <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -28,6 +33,17 @@
             text-decoration: underline;
         }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .inline-form {
+            display: inline;
+            margin: 0;
+        }
+
         .btn {
             background: black;
             padding: 8px 14px;
@@ -37,12 +53,10 @@
         }
 
         .content {
-            padding: 40px;
             min-height: 70vh;
         }
 
         .card {
-            background: white;
             padding: 25px;
             border-radius: 8px;
             flex-direction: column;
@@ -56,27 +70,34 @@
             padding: 20px;
         }
     </style>
+    @yield('styles')
 </head>
-<body>
 
 <header>
-    <div>
-        <a href="{{ route('home') }}">Home Page</a>
-        <a href="{{ route('random.book') }}">Random Book</a>
-    </div>
-    <div>
-        <a href="{{ route('login') }}" class="btn">Sign In</a>
-        <a href="{{ route('register') }}" class ="btn"> Create An Account</a>
+    <div class="logo">Manga<span>Verse</span></div>
+    <nav>
+        <a href="{{ route('home') }}">Home</a>
+        <a href="{{ route('search') }}">Search</a>
+        <a href="#">New Manga</a>
+        <a href="#">Recent Chapters</a>
+    </nav>
+    <div class="header-actions">
+        @guest
+            <a href="{{ route('login') }}" class="btn">Login</a>
+        @else
+            <form method="POST" action="{{ route('logout') }}" class="inline-form">
+                @csrf
+                <button type="submit" class="btn">Logout</button>
+            </form>
+        @endguest
     </div>
 </header>
-
-<div class="content">
+<body style="margin:0;">
     @yield('content')
-</div>
+</body>
 
 <footer>
     <p>filler</p>
 </footer>
 
-</body>
 </html>
