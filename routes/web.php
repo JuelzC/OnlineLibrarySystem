@@ -8,12 +8,16 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminRequestController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MangaRequestController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\AddFavorite;   
 
 Route::get('/', function () {
     return view('home');
 });
+
+Route::post('/admin/upload-manga', [AdminController::class, 'uploadManga']);
 
 Route::get('/request-manga', [MangaRequestController::class, 'index']);
 Route::post('/request-manga', [MangaRequestController::class, 'store']);
@@ -50,6 +54,33 @@ Route::get('/blackjack', function () {
     return view('BlackJack');
     })->name('blackjack.page');
 
-Route::post('/favorites/add', [AddFavorite::class, 'addFavorite'])->name('favorites.add');
 
-Route::get('/user-profile', [UserProfileController::class, 'userProfile'])->name('user-profile');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/admin/signup', [AdminAuthController::class, 'showSignup'])
+    ->name('admin.signup');
+
+Route::post('/admin/signup', [AdminAuthController::class, 'signup'])
+    ->name('admin.signup.submit');
+
+
+
+
+
+Route::get('/admin/requests', function () {
+    return view('admin_request');
+    })->name('admin.requests');

@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
-
     protected $primaryKey = 'book_id';
 
     protected $fillable = [
@@ -26,4 +25,8 @@ class Book extends Model
         );
     }
 
+    public function chapters()
+    {
+        return $this->hasMany(Chapter::class, 'book_id', 'book_id');
+    }
 }
