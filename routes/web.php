@@ -8,6 +8,10 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminRequestController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MangaRequestController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminController;
+
+Route::post('/admin/upload-manga', [AdminController::class, 'uploadManga']);
 
 Route::get('/', function () {
     return view('home');
@@ -46,3 +50,34 @@ Route::get('/BlackJackVolume1Chapter1', function () {
 Route::get('/blackjack', function () {
     return view('BlackJack');
     })->name('blackjack.page');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Route::get('/admin/signup', [AdminAuthController::class, 'showSignup'])
+    ->name('admin.signup');
+
+Route::post('/admin/signup', [AdminAuthController::class, 'signup'])
+    ->name('admin.signup.submit');
+
+
+
+
+
+Route::get('/admin/requests', function () {
+    return view('admin_request');
+    })->name('admin.requests');
