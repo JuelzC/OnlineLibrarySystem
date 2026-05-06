@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\MangaRequestController;
+use App\Http\Controllers\UserProfileController;
 
 Route::get('/', function () {
     return view('home');
@@ -27,6 +28,7 @@ Route::get('/random-book', [BookController::class, 'random'])->name('random.book
 
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/register', [RegisterController::class, 'register'])->name('register.form');
@@ -39,3 +41,7 @@ Route::get('/BlackJackVolume1Chapter1', function () {
 Route::get('/blackjack', function () {
     return view('BlackJack');
     })->name('blackjack.page');
+
+    Route::post('/favorites/add', [AuthController::class, 'addFavorite'])->name('favorites.add');
+
+Route::get('/user-profile', [UserProfileController::class, 'userProfile'])->name('user-profile');

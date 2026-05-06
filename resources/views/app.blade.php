@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,9 +47,10 @@
 
         .btn {
             background: black;
-            padding: 8px 14px;
-            border-radius: 4px;
             color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            border-color: crimson;
             justify-self: center;
         }
 
@@ -72,7 +74,6 @@
     </style>
     @yield('styles')
 </head>
-
 <header>
     <div class="logo">Manga<span>Verse</span></div>
     <nav>
@@ -82,14 +83,15 @@
         <a href="#">Recent Chapters</a>
     </nav>
     <div class="header-actions">
-        @guest
-            <a href="{{ route('login') }}" class="btn">Login</a>
-        @else
-            <form method="POST" action="{{ route('logout') }}" class="inline-form">
+        @auth
+            <a href="{{ route('user-profile') }}">Profile</a>
+            <form action="{{ route('logout') }}" method="POST" class="inline-form">
                 @csrf
                 <button type="submit" class="btn">Logout</button>
             </form>
-        @endguest
+        @else
+            <a href="{{ route('login') }}">Login</a>
+        @endauth
     </div>
 </header>
 <body style="margin:0;">
@@ -97,7 +99,7 @@
 </body>
 
 <footer>
-    <p>filler</p>
+    <p>MangaVerse &copy; 2023</p>
 </footer>
 
 </html>
