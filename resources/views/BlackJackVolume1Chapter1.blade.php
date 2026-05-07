@@ -29,8 +29,8 @@
 
 <div class="image-column">
   @foreach($pages as $page)
-    <img src="{{ asset($page->image) }}">
-@endforeach
+    <img src="{{ asset('storage/' . $page->image) }}">
+  @endforeach
 </div>
 
 </body>

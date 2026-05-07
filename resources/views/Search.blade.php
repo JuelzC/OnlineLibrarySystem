@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search</title>
-</head>
+@extends('app')
 
+@section('styles')
 <style>
 
 body{
@@ -19,10 +14,12 @@ body{
     margin:auto;
 }
 
+/* SEARCH BOX */
 .search-box{
     background:#141821;
     padding:30px;
     border-radius:8px;
+    margin-bottom:30px;
 }
 
 input[type=text]{
@@ -30,13 +27,6 @@ input[type=text]{
     padding:10px;
     margin-top:5px;
     margin-bottom:20px;
-    background:#0d0f14;
-    border:1px solid #333;
-    color:white;
-}
-
-select{
-    padding:8px;
     background:#0d0f14;
     border:1px solid #333;
     color:white;
@@ -62,74 +52,123 @@ button:hover{
     background:#1f6fd6;
 }
 
+/* BOOK GRID */
+.book-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+    gap:20px;
+}
+
+/* CARD */
+.book-card{
+    background:#141821;
+    border-radius:8px;
+    overflow:hidden;
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+    display:block;
+}
+
+.book-card img{
+    width:100%;
+    height:240px;
+    object-fit:cover;
+}
+
+.book-card h3{
+    font-size:14px;
+    padding:10px;
+}
+
+.book-card p{
+    padding:0 10px 10px;
+    font-size:12px;
+    color:#aaa;
+}
+
+.book-card:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 10px crimson;
+}
+
+.empty-message{
+    color:#888;
+    margin-top:20px;
+}
+
 </style>
-<body>
-  <div class="container">
+@endsection
+
+@section('content')
+
+<div class="container">
 
 <h1>Search Books</h1>
 
+<!-- SEARCH FORM -->
 <div class="search-box">
 
-<form method="POST" action="/search">
+<form method="GET" action="/search">
 
-@csrf
+    <label>Title</label>
+    <input type="text" name="title" value="{{ request('title') }}">
 
-<label>Title</label>
+    <h3>Genres</h3>
 
-<br>
+    <div class="genres">
 
-<input type="text" name="title">
+        @foreach($genres as $genre)
 
-<h3>Genres</h3>
+        <label>
+            <input type="checkbox" name="genres[]" value="{{ $genre->genre_id }}"
+            {{ (is_array(request('genres')) && in_array($genre->genre_id, request('genres'))) ? 'checked' : '' }}>
+            {{ $genre->name }}
+        </label>
 
-<div class="genres">
+        @endforeach
 
-@foreach($genres as $genre)
+    </div>
 
-<label>
-
-<input type="checkbox" name="genres[]" value="{{$genre->genre_id}}">
-
-{{$genre->name}}
-
-</label>
-
-@endforeach
-
-</div>
-
-<button type="submit">Search</button>
+    <button type="submit">Search</button>
 
 </form>
 
 </div>
 
+<!-- RESULTS -->
 <div class="book-grid">
 
-@foreach($books as $book)
+@if($books->count())
 
-<div class="book-card">
+    @foreach($books as $book)
 
-<h3>{{$book->title}}</h3>
+        <a href="{{ route('manga.show', $book->book_id) }}" class="book-card">
 
-<p>{{$book->author}}</p>
+            <img src="{{ $book->cover_image 
+                ? asset('storage/' . $book->cover_image)
+                : asset('images/default-cover.jpg') }}">
 
-<p>
+            <h3>{{ $book->title }}</h3>
 
-@foreach($book->genres as $genre)
+            <p>
+                @foreach($book->genres as $genre)
+                    {{ $genre->name }}
+                @endforeach
+            </p>
 
-{{$genre->name}}
+        </a>
 
-@endforeach
+    @endforeach
 
-</p>
+@else
+
+    <p class="empty-message">No results found.</p>
+
+@endif
 
 </div>
 
-@endforeach
-
 </div>
 
-</div>
-</body>
-</html>
+@endsection

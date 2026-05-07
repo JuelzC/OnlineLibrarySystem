@@ -1,5 +1,6 @@
 <?php
 
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,7 +12,6 @@ class MangaRequest extends Model
 
     public $timestamps = true;
 
-    // Fields allowed to be inserted
     protected $fillable = [
         'user_id',
         'title',

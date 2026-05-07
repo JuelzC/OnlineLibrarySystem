@@ -111,11 +111,11 @@ body {
     <script>
         setTimeout(() => {
             document.getElementById('flash-message').style.opacity = '0';
-        }, 2000); // start fading after 2 seconds
+        }, 2000); 
 
         setTimeout(() => {
             document.getElementById('flash-message').remove();
-        }, 3000); // remove after 3 seconds
+        }, 3000); 
     </script>
 @endif
 
@@ -131,28 +131,16 @@ body {
     <h2>Featured Manga</h2>
     <div class="card-container">
 
-        <?php
-        $featured = [
-    [
-        'title' => 'BlackJack Volume 1 Chapter 1',
-        'image' => asset('images/BlackJackVolume1Chapter1/1.jpeg'),
-        'url' => route('blackjack.page')
-    ]
-];
-
-if (!empty($featured)) {
-    foreach ($featured as $manga) {
-        echo "
-        <a href='{$manga['url']}' class='card'>
-            <img src='{$manga['image']}' alt='Manga'>
-            <h3>{$manga['title']}</h3>
-        </a>
-        ";
-    }
-} else {
-    echo "<p class='empty-message'>No featured manga available.</p>";
-}
-        ?>
+        @if(!empty($featured) && $featured->count())
+            @foreach($featured as $manga)
+                <a href="{{ route('manga.show', $manga->book_id) }}" class="card">
+                    <img src="{{ $manga->cover_image ? asset('storage/' . $manga->cover_image) : asset('images/default-cover.jpg') }}" alt="{{ $manga->title }} Cover">
+                    <h3>{{ $manga->title }}</h3>
+                </a>
+            @endforeach
+        @else
+            <p class="empty-message">No featured manga available.</p>
+        @endif
 
     </div>
 </section>

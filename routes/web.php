@@ -12,19 +12,26 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\AddFavorite;   
+use App\Http\Controllers\UploadMangaController;
+use App\Http\Controllers\AdminHomePage;
+use App\Http\Controllers\FeaturedManga;
+use App\Http\Controllers\ChapterController;
 
-Route::get('/', function () {
-    return view('home');
-});
 
-Route::post('/admin/upload-manga', [AdminController::class, 'uploadManga']);
+Route::get('/', [HomeController::class, 'index']);
+Route::post('/add-favorite', [AddFavorite::class, 'addFavorite'])->name('favorites.add');
+Route::get('/admin/upload-manga', [UploadMangaController::class, 'uploadManga'])->name('upload-manga');
+Route::post('/admin/upload-manga', [UploadMangaController::class, 'uploadManga'])
+    ->name('upload-manga');
 
+Route::get('/user-profile', [UserProfileController::class, 'userProfile'])->name('user-profile');
 Route::get('/request-manga', [MangaRequestController::class, 'index']);
 Route::post('/request-manga', [MangaRequestController::class, 'store']);
 
 Route::get('/search', [BookController::class, 'index'])->name('search');
 
 Route::post('/search', [BookController::class, 'search']);
+Route::get('/admin/homepage', [AdminHomePage::class, 'show'])->name('admin');
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -47,29 +54,12 @@ Route::post('/admin/requests/approve/{id}', [AdminRequestController::class, 'app
 Route::post('/admin/requests/reject/{id}', [AdminRequestController::class, 'reject']);
 
 Route::get('/BlackJackVolume1Chapter1', function () {
-    return app(PagesController::class)->showChapter(4); })->name('BlackJackVolume1Chapter1');
+    return app(PagesController::class)->showChapter(1); })->name('BlackJackVolume1Chapter1');
 
 
 Route::get('/blackjack', function () {
     return view('BlackJack');
     })->name('blackjack.page');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 Route::get('/admin/signup', [AdminAuthController::class, 'showSignup'])
     ->name('admin.signup');
@@ -77,10 +67,14 @@ Route::get('/admin/signup', [AdminAuthController::class, 'showSignup'])
 Route::post('/admin/signup', [AdminAuthController::class, 'signup'])
     ->name('admin.signup.submit');
 
+Route::get('/admin/requests', [AdminRequestController::class, 'index'])
+    ->name('admin.requests');
+
+    Route::get('/featured', [FeaturedManga::class, 'featured'])->name('featured');
 
 
+    Route::get('/manga/{id}', [BookController::class, 'show'])
+    ->name('manga.show');
 
-
-Route::get('/admin/requests', function () {
-    return view('admin_request');
-    })->name('admin.requests');
+Route::get('/manga/{book}/chapter/{chapter}', [ChapterController::class, 'show'])
+    ->name('chapters.show');
