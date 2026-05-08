@@ -14,15 +14,6 @@ body {
     color: white;
 }
 
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.logo span {
-    color: crimson;
-}
-
 header {
     padding: 20px 40px;
     background-color: #111;
@@ -133,51 +124,56 @@ header {
     <script>
         setTimeout(() => {
             document.getElementById('flash-message').style.opacity = '0';
-        }, 2000);
+        }, 2000); 
 
         setTimeout(() => {
             document.getElementById('flash-message').remove();
-        }, 3000);
+        }, 3000); 
     </script>
 @endif
 
 <header>
-    <div class="logo">Manga<span>Admin</span></div>
 
-    <div class="admin-nav">
-        <a href="{{ route('admin.requests') }}">View Requests</a>
-    </div>
 </header>
-
 <section class="hero">
-    <h1>Admin Dashboard</h1>
-    <p>Manage manga requests and featured content.</p>
+    <h1>Read Manga Online</h1>
+    <p>Discover the latest and greatest manga chapters.</p>
 </section>
-
 <section class="section">
     <h2>Featured Manga</h2>
     <div class="card-container">
 
-        <?php
-        $featured = [
-            [
-                'title' => 'BlackJack Volume 1 Chapter 1',
-                'image' => asset('images/BlackJackVolume1Chapter1/1.jpeg'),
-                'url' => route('blackjack.page')
-            ]
-        ];
-
-        if (!empty($featured)) {
-            foreach ($featured as $manga) {
-                echo "
-                <a href='{$manga['url']}' class='card'>
-                    <img src='{$manga['image']}' alt='Manga'>
-                    <h3>{$manga['title']}</h3>
+        @if(!empty($featured) && $featured->count())
+            @foreach($featured as $manga)
+                <a href="{{ route('manga.show', $manga->book_id) }}" class="card">
+                    <img src="{{ $manga->cover_image ? asset('storage/' . $manga->cover_image) : asset('images/default-cover.jpg') }}" alt="{{ $manga->title }} Cover">
+                    <h3>{{ $manga->title }}</h3>
                 </a>
+            @endforeach
+        @else
+            <p class="empty-message">No featured manga available.</p>
+        @endif
+
+    </div>
+</section>
+<section class="section">
+    <h2>New Chapters</h2>
+    <div class="card-container">
+
+        <?php
+        $newChapters = []; 
+
+        if (!empty($newChapters)) {
+            foreach ($newChapters as $chapter) {
+                echo "
+                <div class='card'>
+                    <img src='{$chapter['image']}' alt='Chapter'>
+                    <h3>{$chapter['title']}</h3>
+                </div>
                 ";
             }
         } else {
-            echo "<p class='empty-message'>No featured manga available.</p>";
+            echo "<p class='empty-message'>No new chapters available.</p>";
         }
         ?>
 

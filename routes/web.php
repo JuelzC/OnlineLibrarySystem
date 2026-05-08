@@ -78,3 +78,7 @@ Route::get('/admin/requests', [AdminRequestController::class, 'index'])
 
 Route::get('/manga/{book}/chapter/{chapter}', [ChapterController::class, 'show'])
     ->name('chapters.show');
+
+    Route::get('/admin/homepage', [AdminHomePage::class, 'show'])->name('admin.homepage');
+    Route::get('/admin/featured', [FeaturedManga::class, 'featured'])->name('admin.featured');
+    Route::get('admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');

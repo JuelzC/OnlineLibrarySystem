@@ -14,16 +14,6 @@ body {
     color: white;
 }
 
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.logo span {
-    color: crimson;
-}
-
 .hero {
     text-align: center;
     padding: 60px 20px;

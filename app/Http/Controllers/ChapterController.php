@@ -8,19 +8,37 @@ use App\Models\Page;
 
 class ChapterController extends Controller
 {
-    public function show($bookId, $chapterId)
+    public function show($book, $chapter)
     {
-        $book = Book::findOrFail($bookId);
+        // Book
+        $book = Book::findOrFail($book);
 
-        $chapter = Chapter::findOrFail($chapterId);
+        // Current chapter
+        $chapter = Chapter::findOrFail($chapter);
 
-        $pages = Page::where('chapter_id', $chapterId)
+        // Pages
+        $pages = Page::where('chapter_id', $chapter->chapter_id)
             ->orderBy('page_number')
             ->get();
 
-        return view(
-            'chapters.show',
-            compact('book', 'chapter', 'pages')
-        );
+        // Previous chapter
+        $previousChapter = Chapter::where('book_id', $book->book_id)
+            ->where('chapter_number', '<', $chapter->chapter_number)
+            ->orderBy('chapter_number', 'desc')
+            ->first();
+
+        // Next chapter
+        $nextChapter = Chapter::where('book_id', $book->book_id)
+            ->where('chapter_number', '>', $chapter->chapter_number)
+            ->orderBy('chapter_number', 'asc')
+            ->first();
+
+        return view('chapters.show', compact(
+            'book',
+            'chapter',
+            'pages',
+            'previousChapter',
+            'nextChapter'
+        ));
     }
 }

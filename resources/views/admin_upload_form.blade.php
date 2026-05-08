@@ -1,3 +1,6 @@
+@extends('app')
+
+@section('content')
 <form action="/admin/upload-manga" method="POST" enctype="multipart/form-data">
     @csrf
 
@@ -30,3 +33,5 @@
 
     <button type="submit">Upload Chapter</button>
 </form>
+
+@endsection 

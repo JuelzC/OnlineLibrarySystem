@@ -1,7 +1,31 @@
 @extends('app')
 
-@section('content')
 
+<style> 
+    ul {
+        text-decoration: none;
+    }
+    .perChapter {
+        list-style: none;
+        text-decoration: none;
+        padding: 10px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background: crimson;
+        display: inline-block;
+        border-radius: 25px;
+    }
+    .perChapter:visited, .perChapter:link, .perChapter a {
+        color: white;
+        text-decoration: none;
+    }
+    body {
+        background: black;
+        color: white;
+    }
+</style>
+@section('content')
+<body>
 <div style="display:flex; gap:40px; padding:40px;">
 
     <div>
@@ -22,7 +46,7 @@
 
             @forelse($chapters as $chapter)
 
-                <li>
+                <li class="perChapter">
 
                     <a href="{{ route(
                         'chapters.show',
@@ -46,5 +70,5 @@
     </div>
 
 </div>
-
+</body>
 @endsection

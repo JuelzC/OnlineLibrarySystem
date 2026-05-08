@@ -25,12 +25,17 @@ class UploadMangaController extends Controller
             ]);
 
             // Find or create book
-            $book = Book::firstOrCreate([
+            $coverImagePath = null;
+            if ($request->hasFile('cover_image')) {
+                $coverImagePath = $request->file('cover_image')->store('covers', 'public');
+            }
+
+            $book = Book::updateOrCreate([
                 'title' => $request->title,
                 'author' => $request->author,
             ], [
                 'description' => $request->description,
-                'cover_image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'cover_image' => $coverImagePath,
             ]);
 
             $chapter = Chapter::create([
