@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,6 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
         }
 
         header {
@@ -32,6 +32,11 @@
         header a:hover {
             text-decoration: underline;
         }
+        
+
+        a {
+            text-decoration: none;
+        }
 
         .header-actions {
             display: flex;
@@ -46,12 +51,16 @@
 
         .btn {
             background: black;
-            padding: 8px 14px;
-            border-radius: 4px;
             color: white;
+            padding: 8px 14px;
+            border-radius: 20px;
+            border-color: crimson;
             justify-self: center;
         }
-
+        .logo span {
+            color: orangered;
+            font: italic bold 24px 'Arial', sans-serif;
+        }
         .content {
             min-height: 70vh;
         }
@@ -63,6 +72,41 @@
             justify-items: center;
         }
 
+        .headerButtons, .perChapter {
+            display: inline-block;
+            background: crimson;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+        }
+        .headerButtons:link,
+        .headerButtons:visited {
+            color: white;
+            text-decoration: none;
+        }
+        .headerButtons:hover, .perChapter:hover {
+            background: darkred;
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .headerButtons:active, .perChapter:active {
+            transform: scale(0.90);
+            transition: transform 0.05s ease;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo span {
+            color: orangered;
+        }
+
         footer {
             background: #222;
             color: white;
@@ -72,24 +116,22 @@
     </style>
     @yield('styles')
 </head>
-
 <header>
     <div class="logo">Manga<span>Verse</span></div>
     <nav>
-        <a href="{{ route('home') }}">Home</a>
-        <a href="{{ route('search') }}">Search</a>
-        <a href="#">New Manga</a>
-        <a href="#">Recent Chapters</a>
+        <a class="headerButtons" href="{{ route('home') }}">Home</a>
+        <a class="headerButtons" href="{{ route('search') }}">Search</a>
     </nav>
     <div class="header-actions">
-        @guest
-            <a href="{{ route('login') }}" class="btn">Login</a>
-        @else
-            <form method="POST" action="{{ route('logout') }}" class="inline-form">
+        @auth
+            <a class="headerButtons"href="{{ route('user-profile') }}">Profile</a>
+            <form action="{{ route('logout') }}" method="POST" class="inline-form">
                 @csrf
-                <button type="submit" class="btn">Logout</button>
+                <button class="headerButtons" type="submit">Logout</button>
             </form>
-        @endguest
+        @else
+            <a class="headerButtons" href="{{ route('login') }}">Login</a>
+        @endauth
     </div>
 </header>
 <body style="margin:0;">
@@ -97,7 +139,7 @@
 </body>
 
 <footer>
-    <p>filler</p>
+    <p>MangaVerse &copy; 2026</p>
 </footer>
 
 </html>

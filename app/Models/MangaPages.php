@@ -9,7 +9,7 @@ class MangaPages extends Model
     protected $table = 'pages';
 
     protected $fillable = [
-        'book_id',
+        'chapter_id',
         'page_number',
         'image',
     ];

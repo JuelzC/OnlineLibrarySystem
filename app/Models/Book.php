@@ -11,8 +11,10 @@ class Book extends Model
     protected $fillable = [
         'title',
         'author',
+        'description',
         'release_date',
-        'total_pages'
+        'total_pages',
+        'cover_image',
     ];
 
     public function genres()

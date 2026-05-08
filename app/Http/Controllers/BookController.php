@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Genre;
+use App\Models\Chapter;
 
 class BookController extends Controller
 {
@@ -41,6 +41,18 @@ class BookController extends Controller
 
         return view('Search', compact('books','genres'));
 
+    }
+
+    // ADD THIS
+    public function show($id)
+    {
+        $book = Book::findOrFail($id);
+
+        $chapters = Chapter::where('book_id', $id)
+            ->orderBy('chapter_number')
+            ->get();
+
+        return view('manga.show', compact('book', 'chapters'));
     }
 
 }

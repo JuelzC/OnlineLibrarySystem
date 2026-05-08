@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
+
 class HomeController extends Controller
 {
-    // Method that handles the home page
     public function index()
     {
-        return view('home'); // This points to resources/views/home.blade.php
+        $featured = Book::all();
+        return view('home', compact('featured'));
     }
 }

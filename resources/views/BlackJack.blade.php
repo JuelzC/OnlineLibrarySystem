@@ -60,6 +60,21 @@
 .empty-message {
     color: #888;
 }
+.favorite-btn {
+    width: 100%;
+    padding: 10px;
+    background: crimson;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-bottom: 20px;
+}
+
+.favorite-btn:hover {
+    background: darkred;
+}
 </style>
 @endsection
 
@@ -104,7 +119,14 @@
         </ul>
 
     </div>
+    <form method="POST" action="{{ route('favorites.add') }}">
+    @csrf
+    <input type="hidden" name="manga" value="BlackJack">
 
+    <button type="submit" class="favorite-btn">
+        Add to Favorites
+    </button>
+</form>
 </section>
 
 @endsection

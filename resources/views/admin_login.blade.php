@@ -38,7 +38,7 @@
 
     <button type="submit" class="btn" style="width: 100%;">Login</button>
     </form>
-    <p class="newUser">Don't have an account? <a href="{{ route('register') }}">Register here</a>.</p>
+    <p class="newUser">Don't have an account? <a href="{{ route('admin') }}">Register here</a>.</p>
 </div>
 
 

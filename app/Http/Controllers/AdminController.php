@@ -4,14 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-class AdminController extends Controller
-{
-    use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Chapter;
 use App\Models\Page;
 use Illuminate\Support\Facades\Storage;
+
+class AdminController extends Controller
+{
 
 public function uploadManga(Request $request)
 {

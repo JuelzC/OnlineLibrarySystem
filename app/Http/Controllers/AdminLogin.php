@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class AdminLogin extends Controller
 {
-    public function showLogin()
+     public function showLogin()
     {
-        return view('login');
+        return view('/adminsignup');
     }
 
     public function login(Request $request)
@@ -17,11 +18,11 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/home');
+            return redirect()->intended('/admin');
         }
 
         return back()->withErrors([
             'email' => 'Invalid credentials',
         ]);
     }
-}   
+}
