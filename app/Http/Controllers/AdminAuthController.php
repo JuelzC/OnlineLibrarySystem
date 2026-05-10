@@ -30,7 +30,7 @@ class AdminAuthController extends Controller
             'email' => $request->email,
             'date_of_birth' => $request->date_of_birth,
             'password' => Hash::make($request->password),
-            'account_approval' => 1
+            'account_approval' => 0
         ]);
 
         return redirect()->route('admin.signup')
