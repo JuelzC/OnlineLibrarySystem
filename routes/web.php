@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
@@ -83,3 +83,15 @@ Route::get('/manga/{book}/chapter/{chapter}', [ChapterController::class, 'show']
     Route::get('/admin/homepage', [AdminHomePage::class, 'show'])->name('admin.homepage');
     Route::get('/admin/featured', [FeaturedManga::class, 'featured'])->name('admin.featured');
     Route::get('admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
+
+    
+Route::get('/admin/approvals', [AdminApprovalController::class, 'index'])
+    ->name('admin.approvals');
+
+
+Route::post('/admin/approve/{id}', [AdminApprovalController::class, 'approve'])
+    ->name('admin.approve');
+
+
+Route::post('/admin/reject/{id}', [AdminApprovalController::class, 'reject'])
+    ->name('admin.reject');
