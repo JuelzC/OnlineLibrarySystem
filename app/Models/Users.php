@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Book;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Users extends Authenticatable
 {
     protected $table = 'users';
+
     protected $primaryKey = 'user_id';
 
     public $timestamps = false;
@@ -20,4 +22,15 @@ class Users extends Authenticatable
         'account_approval'
     ];
 
+    public function bookmarks()
+{
+    return $this->belongsToMany(
+        Book::class,
+        'bookmarks',
+        'user_id',
+        'book_id'
+    )
+    ->withTimestamps()
+    ->select('books.*');
+}
 }

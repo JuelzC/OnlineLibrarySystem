@@ -70,5 +70,36 @@
     </div>
 
 </div>
+    <div class="bookmark">
+
+    @auth
+
+        @php
+            $isBookmarked = auth()->user()
+                ->bookmarks()
+                ->where('bookmarks.book_id', $book->book_id)
+                ->exists();
+        @endphp
+
+        <form action="{{ route('books.bookmark', $book->book_id) }}" method="POST">
+            @csrf
+
+            <button type="submit" class="headerButtons">
+
+                {{ $isBookmarked ? 'Remove Bookmark' : 'Bookmark Manga' }}
+
+            </button>
+
+        </form>
+
+    @else
+
+        <a class="headerButtons" href="{{ route('login') }}">
+            Login to Bookmark
+        </a>
+
+    @endauth
+
+</div>
 </body>
 @endsection

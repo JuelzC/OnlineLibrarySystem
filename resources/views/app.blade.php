@@ -1,18 +1,30 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 
     <style>
         * {
-            margin: 0 auto;
+            margin: 0;
             padding: 0;
             box-sizing: border-box;
             font-family: Arial, sans-serif;
         }
+
+        html, body {
+            height: 100%;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
+
+            background: black;
+            color: white;
+
+            min-height: 100vh;
+
+            display: flex;
+            flex-direction: column;
         }
 
         header {
@@ -32,7 +44,6 @@
         header a:hover {
             text-decoration: underline;
         }
-        
 
         a {
             text-decoration: none;
@@ -57,12 +68,20 @@
             border-color: crimson;
             justify-self: center;
         }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+        }
+
         .logo span {
             color: orangered;
-            font: italic bold 24px 'Arial', sans-serif;
+            font-style: italic;
         }
+
         .content {
-            min-height: 70vh;
+            flex: 1;
         }
 
         .card {
@@ -72,7 +91,8 @@
             justify-items: center;
         }
 
-        .headerButtons, .perChapter {
+        .headerButtons,
+        .perChapter {
             display: inline-block;
             background: crimson;
             color: white;
@@ -83,28 +103,24 @@
             font-size: 16px;
             text-decoration: none;
         }
+
         .headerButtons:link,
         .headerButtons:visited {
             color: white;
             text-decoration: none;
         }
-        .headerButtons:hover, .perChapter:hover {
+
+        .headerButtons:hover,
+        .perChapter:hover {
             background: darkred;
             transition: 0.3s;
             text-decoration: none;
         }
-        .headerButtons:active, .perChapter:active {
+
+        .headerButtons:active,
+        .perChapter:active {
             transform: scale(0.90);
             transition: transform 0.05s ease;
-        }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .logo span {
-            color: orangered;
         }
 
         footer {
@@ -114,32 +130,41 @@
             padding: 20px;
         }
     </style>
+
     @yield('styles')
 </head>
-<header>
-    <div class="logo">Manga<span>Verse</span></div>
-    <nav>
-        <a class="headerButtons" href="{{ route('home') }}">Home</a>
-        <a class="headerButtons" href="{{ route('search') }}">Search</a>
-    </nav>
-    <div class="header-actions">
-        @auth
-            <a class="headerButtons"href="{{ route('user-profile') }}">Profile</a>
-            <form action="{{ route('logout') }}" method="POST" class="inline-form">
-                @csrf
-                <button class="headerButtons" type="submit">Logout</button>
-            </form>
-        @else
-            <a class="headerButtons" href="{{ route('login') }}">Login</a>
-        @endauth
-    </div>
-</header>
-<body style="margin:0;">
-    @yield('content')
+
+<body>
+
+    <header>
+        <div class="logo">Manga<span>Verse</span></div>
+
+        <nav>
+            <a class="headerButtons" href="{{ route('home') }}">Home</a>
+            <a class="headerButtons" href="{{ route('search') }}">Search</a>
+        </nav>
+
+        <div class="header-actions">
+            @auth
+                <a class="headerButtons" href="{{ route('user-profile') }}">Profile</a>
+
+                <form action="{{ route('logout') }}" method="POST" class="inline-form">
+                    @csrf
+                    <button class="headerButtons" type="submit">Logout</button>
+                </form>
+            @else
+                <a class="headerButtons" href="{{ route('login') }}">Login</a>
+            @endauth
+        </div>
+    </header>
+
+    <main class="content">
+        @yield('content')
+    </main>
+
+    <footer>
+        <p>MangaVerse &copy; 2026</p>
+    </footer>
+
 </body>
-
-<footer>
-    <p>MangaVerse &copy; 2026</p>
-</footer>
-
 </html>

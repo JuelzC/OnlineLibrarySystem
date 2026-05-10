@@ -16,6 +16,7 @@ use App\Http\Controllers\UploadMangaController;
 use App\Http\Controllers\AdminHomePage;
 use App\Http\Controllers\FeaturedManga;
 use App\Http\Controllers\ChapterController;
+use App\Http\Controllers\BookmarkController;
 
 
 Route::get('/', [HomeController::class, 'index']);
@@ -82,3 +83,11 @@ Route::get('/manga/{book}/chapter/{chapter}', [ChapterController::class, 'show']
     Route::get('/admin/homepage', [AdminHomePage::class, 'show'])->name('admin.homepage');
     Route::get('/admin/featured', [FeaturedManga::class, 'featured'])->name('admin.featured');
     Route::get('admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
+
+Route::post('/books/{book}/bookmark', [BookmarkController::class, 'toggle'])
+    ->middleware('auth')
+    ->name('books.bookmark');
+
+Route::get('/profile', [UserProfileController::class, 'userProfile'])
+    ->middleware('auth')
+    ->name('user-profile');

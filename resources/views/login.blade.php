@@ -8,6 +8,7 @@
     color: crimson;
     padding-top: 45px;
     padding-bottom: 30px;
+    text-decoration: none;
 }
 .title{
     text-align: center;
@@ -21,11 +22,18 @@
 .logo span {
     color: crimson;
 }
+.card {
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 40px auto;
+}
 </style>
+<div class="card">
 <div class = "title"> 
     <h1> Login</h1>
 </div>
-<div class="card">
   
     <form method="POST" action="{{ route('login') }}">
     @csrf

@@ -1,18 +1,38 @@
-@extends('app')
+
+@extends('home')
 
 @section('content')
-@if(Auth::check())
-    <h1>Welcome, {{ Auth::user()->name }}!</h1>
-    <p>This is your user profile page.</p>
-@else
-    <h1>Welcome to MangaVerse!</h1>
-    <p>Please <a href="{{ route('login') }}">log in</a> to view your profile.</p>
-@endif
+
+<section class="hero">
+    <h1>My Profile</h1>
+    <p>Your bookmarked manga collection</p>
+</section>
+
+<section class="section">
+    <h2>Bookmarked Manga</h2>
+
+    @if($bookmarks->count())
+
+        <div class="card-container">
+
+            @foreach($bookmarks as $manga)
+
+                <a href="{{ route('manga.show', $manga->book_id) }}" class="card">
+
+                    <img src="{{ $manga->cover_image ? asset('storage/' . $manga->cover_image) : asset('images/default-cover.jpg') }}">
+
+                    <h3>{{ $manga->title }}</h3>
+
+                </a>
+
+            @endforeach
+
+        </div>
+
+    @else
+        <p class="empty-message">You have no bookmarks yet.</p>
+    @endif
+
+</section>
+
 @endsection
-<Title> User Profile </Title> 
-
-<body> 
-    <p> 
-
-    </p> 
-</body>
