@@ -17,6 +17,7 @@ use App\Http\Controllers\AdminHomePage;
 use App\Http\Controllers\FeaturedManga;
 use App\Http\Controllers\ChapterController;
 
+Route::get('/new-manga', [HomeController::class, 'newManga'])->name('new.manga');
 
 Route::get('/', [HomeController::class, 'index']);
 Route::post('/add-favorite', [AddFavorite::class, 'addFavorite'])->name('favorites.add');
