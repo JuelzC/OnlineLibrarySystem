@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('styles')
+
 <style>
 body {
     background-color: black;
@@ -45,9 +45,9 @@ body {
     background: darkred;
 }
 </style>
-@endsection
 
-@section('content')
+
+
 
 <div class="signup-container">
     <h2>Create Admin Account</h2>
