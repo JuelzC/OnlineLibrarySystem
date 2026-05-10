@@ -1,6 +1,7 @@
 @extends('app')
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -79,7 +80,7 @@
         transform: scale(0.97);
     }
 </style>
-
+@section('content')
 <body>
     <H1>Request a manga</H1>
     @if(session('success'))
@@ -110,5 +111,5 @@
     </form>
     
 </body>
-</html>
 @endsection
+</html>

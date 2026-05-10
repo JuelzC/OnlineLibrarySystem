@@ -113,23 +113,6 @@ button:hover{
 
     <label>Title</label>
     <input type="text" name="title" value="{{ request('title') }}">
-
-    <h3>Genres</h3>
-
-    <div class="genres">
-
-        @foreach($genres as $genre)
-
-        <label>
-            <input type="checkbox" name="genres[]" value="{{ $genre->genre_id }}"
-            {{ (is_array(request('genres')) && in_array($genre->genre_id, request('genres'))) ? 'checked' : '' }}>
-            {{ $genre->name }}
-        </label>
-
-        @endforeach
-
-    </div>
-
     <button type="submit">Search</button>
 
 </form>

@@ -78,9 +78,6 @@ Route::get('/admin/requests', [AdminRequestController::class, 'index'])
     Route::get('/manga/{id}', [BookController::class, 'show'])
     ->name('manga.show');
 
-Route::get('/manga/{book}/chapter/{chapter}', [ChapterController::class, 'show'])
-    ->name('chapters.show');
-
     Route::get('/admin/homepage', [AdminHomePage::class, 'show'])->name('admin.homepage');
     Route::get('/admin/featured', [FeaturedManga::class, 'featured'])->name('admin.featured');
     Route::get('admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
@@ -92,3 +89,13 @@ Route::post('/books/{book}/bookmark', [BookmarkController::class, 'toggle'])
 Route::get('/profile', [UserProfileController::class, 'userProfile'])
     ->middleware('auth')
     ->name('user-profile');
+
+    Route::get('/new-manga', [HomeController::class, 'newManga'])->name('new-manga');
+    Route::get('/request-manga', [MangaRequestController::class, 'index'])->name('request-manga');
+    Route::get('/chapters/latest', [ChapterController::class, 'latest'])->name('chapters.latest');
+
+    Route::get('/manga/{book}/chapter/{chapter}', [ChapterController::class, 'show'])
+    ->name('chapters.show');
+
+Route::get('/chapters/latest', [ChapterController::class, 'latest'])
+    ->name('chapters.latest');

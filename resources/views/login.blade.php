@@ -3,11 +3,19 @@
 * {
     /* background-color: black; */
 }
-.newUser {
+.newUser{
     color: crimson;
     padding-top: 45px;
     padding-bottom: 30px;
     text-decoration: none;
+    font: 16px Arial, sans-serif;
+}
+.newUser a {
+    color: lightblue;
+    text-decoration: none;
+    font-weight: bold;
+    font: 16px Arial, sans-serif;
+    
 }
 .title{
     text-align: center;
@@ -29,6 +37,7 @@
     margin: 40px auto;
 }
 </style>
+@section('content')
 <div class="card">
 <div class = "title"> 
     <h1> Login</h1>
@@ -45,7 +54,7 @@
 
     <button type="submit" class="btn" style="width: 100%;">Login</button>
     </form>
-    <p class="newUser">Don't have an account? <a href="{{ route('register') }}">Register here</a>.</p>
+    <p class="newUser">Don't have an account? <a href="{{ route('register') }}">Register here</a></p>
 </div>
 
 

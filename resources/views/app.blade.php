@@ -142,6 +142,9 @@
         <nav>
             <a class="headerButtons" href="{{ route('home') }}">Home</a>
             <a class="headerButtons" href="{{ route('search') }}">Search</a>
+            <a class="headerButtons" href="/new-manga">New Manga</a>
+            <a class="headerButtons" href="/request-manga">Request Manga</a>
+            <a class="headerButtons" href="{{ route('chapters.latest') }}">Latest Chapters</a>
         </nav>
 
         <div class="header-actions">

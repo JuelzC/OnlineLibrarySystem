@@ -16,6 +16,6 @@ class HomeController extends Controller
     {
         $newManga = Book::latest()->take(12)->get();
 
-        return view('new-manga', compact('newManga'));
+        return view('NewManga', compact('newManga'));
     }
 }

@@ -4,30 +4,29 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Chapter;
-use App\Models\Page;
 
 class ChapterController extends Controller
 {
-    public function show($book, $chapter)
+    public function show($bookId, $chapterId)
     {
-        // Book
-        $book = Book::findOrFail($book);
+        // Book (safe load)
+        $book = Book::findOrFail($bookId);
 
-        // Current chapter
-        $chapter = Chapter::findOrFail($chapter);
+        // Chapter MUST belong to this book (important fix)
+        $chapter = Chapter::where('book_id', $book->book_id)
+            ->where('chapter_id', $chapterId)
+            ->firstOrFail();
 
-        // Pages
-        $pages = Page::where('chapter_id', $chapter->chapter_id)
-            ->orderBy('page_number')
-            ->get();
+        // Pages (use relationship instead of manual query)
+        $pages = $chapter->pages;
 
-        // Previous chapter
+        // Previous chapter (within same book)
         $previousChapter = Chapter::where('book_id', $book->book_id)
             ->where('chapter_number', '<', $chapter->chapter_number)
             ->orderBy('chapter_number', 'desc')
             ->first();
 
-        // Next chapter
+        // Next chapter (within same book)
         $nextChapter = Chapter::where('book_id', $book->book_id)
             ->where('chapter_number', '>', $chapter->chapter_number)
             ->orderBy('chapter_number', 'asc')
@@ -41,4 +40,13 @@ class ChapterController extends Controller
             'nextChapter'
         ));
     }
+    public function latest()
+{
+    $chapters = Chapter::with('book')
+        ->orderBy('created_at', 'desc')
+        ->take(12)
+        ->get();
+
+    return view('recentChapters', compact('chapters'));
+}
 }
