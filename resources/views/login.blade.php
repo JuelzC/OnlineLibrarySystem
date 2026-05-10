@@ -1,5 +1,4 @@
 @extends('app')
-@section('content')
 <style> 
 * {
     /* background-color: black; */

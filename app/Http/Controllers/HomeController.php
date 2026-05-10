@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Models\Book;
 
@@ -10,5 +11,11 @@ class HomeController extends Controller
     {
         $featured = Book::all();
         return view('home', compact('featured'));
+    }
+    public function newManga()
+    {
+        $newManga = Book::latest()->take(12)->get();
+
+        return view('new-manga', compact('newManga'));
     }
 }

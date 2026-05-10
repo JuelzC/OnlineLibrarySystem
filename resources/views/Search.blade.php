@@ -1,6 +1,6 @@
 @extends('app')
 
-@section('styles')
+
 <style>
 
 body{
@@ -14,7 +14,7 @@ body{
     margin:auto;
 }
 
-/* SEARCH BOX */
+
 .search-box{
     background:#141821;
     padding:30px;
@@ -52,14 +52,14 @@ button:hover{
     background:#1f6fd6;
 }
 
-/* BOOK GRID */
+
 .book-grid{
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
     gap:20px;
 }
 
-/* CARD */
+
 .book-card{
     background:#141821;
     border-radius:8px;
@@ -98,7 +98,7 @@ button:hover{
 }
 
 </style>
-@endsection
+
 
 @section('content')
 

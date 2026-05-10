@@ -15,7 +15,7 @@ class AdminRequestController extends Controller
         return view('admin-requests', compact('requests'));
     }
 
-    // Approve a request
+    
     public function approve($id)
     {
         $mangaRequest = MangaRequest::findOrFail($id);
@@ -27,15 +27,14 @@ class AdminRequestController extends Controller
             ->with('success', 'Manga request approved successfully.');
     }
 
-    // Reject a request
+    
     public function reject($id)
     {
         $mangaRequest = MangaRequest::findOrFail($id);
 
-        $mangaRequest->status = 'rejected';
-        $mangaRequest->save();
+        $mangaRequest->delete();
 
         return redirect('/admin/requests')
-            ->with('success', 'Manga request rejected successfully.');
+            ->with('success', 'Manga request rejected and removed successfully.');
     }
 }

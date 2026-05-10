@@ -18,6 +18,7 @@ use App\Http\Controllers\FeaturedManga;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\BookmarkController;
 
+Route::get('/new-manga', [HomeController::class, 'newManga'])->name('new.manga');
 
 Route::get('/', [HomeController::class, 'index']);
 Route::post('/add-favorite', [AddFavorite::class, 'addFavorite'])->name('favorites.add');

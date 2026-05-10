@@ -17,35 +17,6 @@
             color: white;
         }
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 40px;
-            background-color: #1a1a1a;
-            border-bottom: 2px solid #222;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
-
-        .logo span {
-            color: crimson;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin-left: 20px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: crimson;
-        }
-
         .hero {
             text-align: center;
             padding: 60px 20px;
@@ -93,13 +64,6 @@
         .card p {
             font-size: 14px;
             color: #ccc;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #1a1a1a;
-            margin-top: 40px;
         }
 
         .empty-message {
@@ -181,10 +145,5 @@
     </div>
 
 </div>
-
-<footer>
-    © {{ date('Y') }} MangaHub
-</footer>
-
 </body>
 </html>
