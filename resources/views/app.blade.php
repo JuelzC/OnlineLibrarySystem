@@ -15,14 +15,9 @@
         }
 
         body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-
             background: black;
             color: white;
-
             min-height: 100vh;
-
             display: flex;
             flex-direction: column;
         }
@@ -33,40 +28,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        header a {
-            color: white;
-            text-decoration: none;
-            margin-right: 20px;
-        }
-
-        header a:hover {
-            text-decoration: underline;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .inline-form {
-            display: inline;
-            margin: 0;
-        }
-
-        .btn {
-            background: black;
-            color: white;
-            padding: 8px 14px;
-            border-radius: 20px;
-            border-color: crimson;
-            justify-self: center;
         }
 
         .logo {
@@ -80,19 +41,33 @@
             font-style: italic;
         }
 
-        .content {
-            flex: 1;
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
-        .card {
-            padding: 25px;
-            border-radius: 8px;
-            flex-direction: column;
-            justify-items: center;
+        .admin-links {
+            display: flex;
+            gap: 10px;
+            margin-left: 10px;
+            padding-left: 10px;
+            border-left: 2px solid #444;
+            flex-wrap: wrap;
         }
 
-        .headerButtons,
-        .perChapter {
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .inline-form {
+            display: inline;
+        }
+
+        .headerButtons {
             display: inline-block;
             background: crimson;
             color: white;
@@ -104,28 +79,16 @@
             text-decoration: none;
         }
 
-        .headerButtons:link,
-        .headerButtons:visited {
-            color: white;
-            text-decoration: none;
-        }
-
-        .headerButtons:hover,
-        .perChapter:hover {
+        .headerButtons:hover {
             background: darkred;
-            transition: 0.3s;
-            text-decoration: none;
         }
 
-        .headerButtons:active,
-        .perChapter:active {
-            transform: scale(0.90);
-            transition: transform 0.05s ease;
+        .content {
+            flex: 1;
         }
 
         footer {
             background: #222;
-            color: white;
             text-align: center;
             padding: 20px;
         }
@@ -136,38 +99,49 @@
 
 <body>
 
-    <header>
-        <div class="logo">Manga<span>Verse</span></div>
+<header>
+    <div class="logo">Manga<span>Verse</span></div>
 
-        <nav>
-            <a class="headerButtons" href="{{ route('home') }}">Home</a>
-            <a class="headerButtons" href="{{ route('search') }}">Search</a>
-            <a class="headerButtons" href="/new-manga">New Manga</a>
-            <a class="headerButtons" href="/request-manga">Request Manga</a>
-            <a class="headerButtons" href="{{ route('chapters.latest') }}">Latest Chapters</a>
-        </nav>
+    <nav style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+        <a class="headerButtons" href="{{ route('home') }}">Home</a>
+        <a class="headerButtons" href="{{ route('search') }}">Search</a>
+        <a class="headerButtons" href="/new-manga">New Manga</a>
+        <a class="headerButtons" href="/request-manga">Request Manga</a>
+        <a class="headerButtons" href="{{ route('chapters.latest') }}">Latest Chapters</a>
 
-        <div class="header-actions">
-            @auth
-                <a class="headerButtons" href="{{ route('user-profile') }}">Profile</a>
+        @auth
+            @if(auth()->user()->role_id == 1)
+                <a class="headerButtons" href="{{ route('upload-manga') }}">Add Manga</a>
+                <a class="headerButtons" href="{{ route('admin.homepage') }}">Admin Dashboard</a>
+                <a class="headerButtons" href="{{ route('admin.requests') }}">Manga Requests</a>
+                <a class="headerButtons" href="{{ route('admin.approvals') }}">User Management</a>
+            @endif
+        @endauth
+    </nav>
 
-                <form action="{{ route('logout') }}" method="POST" class="inline-form">
-                    @csrf
-                    <button class="headerButtons" type="submit">Logout</button>
-                </form>
-            @else
-                <a class="headerButtons" href="{{ route('login') }}">Login</a>
-            @endauth
-        </div>
-    </header>
+    <div class="header-actions" style="display:flex; align-items:center; gap:10px;">
+        @auth
+            <a class="headerButtons" href="{{ route('user-profile') }}">Profile</a>
 
-    <main class="content">
-        @yield('content')
-    </main>
+            <form action="{{ route('logout') }}" method="POST" class="inline-form" style="margin:0;">
+                @csrf
+                <button type="submit" class="headerButtons">
+                    Logout
+                </button>
+            </form>
+        @else
+            <a class="headerButtons" href="{{ route('login') }}">Login</a>
+        @endauth
+    </div>
+</header>
 
-    <footer>
-        <p>MangaVerse &copy; 2026</p>
-    </footer>
+<main class="content">
+    @yield('content')
+</main>
+
+<footer>
+    <p>MangaVerse &copy; 2026</p>
+</footer>
 
 </body>
 </html>

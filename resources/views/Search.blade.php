@@ -1,8 +1,8 @@
 @extends('app')
 
+@section('content')
 
 <style>
-
 body{
     background:#0d0f14;
     color:white;
@@ -12,8 +12,8 @@ body{
 .container{
     width:80%;
     margin:auto;
+    padding-top:30px;
 }
-
 
 .search-box{
     background:#141821;
@@ -32,33 +32,25 @@ input[type=text]{
     color:white;
 }
 
-.genres{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:10px;
-    margin-top:20px;
-}
-
 button{
-    margin-top:20px;
+    margin-top:10px;
     padding:10px 20px;
     border:none;
     background:#2d8cff;
     color:white;
     cursor:pointer;
+    border-radius:5px;
 }
 
 button:hover{
     background:#1f6fd6;
 }
 
-
 .book-grid{
     display:grid;
     grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
     gap:20px;
 }
-
 
 .book-card{
     background:#141821;
@@ -96,61 +88,64 @@ button:hover{
     color:#888;
     margin-top:20px;
 }
-
 </style>
-
-
-@section('content')
 
 <div class="container">
 
-<h1>Search Books</h1>
+    <h1>Search Books</h1>
 
-<!-- SEARCH FORM -->
-<div class="search-box">
+    <div class="search-box">
 
-<form method="GET" action="/search">
+        <form method="GET" action="{{ route('search') }}">
 
-    <label>Title</label>
-    <input type="text" name="title" value="{{ request('title') }}">
-    <button type="submit">Search</button>
+            <label>Title</label>
 
-</form>
+            <input 
+                type="text" 
+                name="title" 
+                value="{{ request('title') }}"
+                placeholder="Search by title..."
+            >
 
-</div>
+            <button type="submit">Search</button>
 
-<!-- RESULTS -->
-<div class="book-grid">
+        </form>
 
-@if($books->count())
+    </div>
 
-    @foreach($books as $book)
+    <div class="book-grid">
 
-        <a href="{{ route('manga.show', $book->book_id) }}" class="book-card">
+        @if(isset($books) && $books->count())
 
-            <img src="{{ $book->cover_image 
-                ? asset('storage/' . $book->cover_image)
-                : asset('images/default-cover.jpg') }}">
+            @foreach($books as $book)
 
-            <h3>{{ $book->title }}</h3>
+                <a href="{{ route('manga.show', $book->book_id) }}" class="book-card">
 
-            <p>
-                @foreach($book->genres as $genre)
-                    {{ $genre->name }}
-                @endforeach
-            </p>
+                    <img src="{{ $book->cover_image 
+                        ? asset('storage/' . $book->cover_image)
+                        : asset('images/default-cover.jpg') }}">
 
-        </a>
+                    <h3>{{ $book->title }}</h3>
 
-    @endforeach
+                    <p>
+                        @if($book->genres)
+                            @foreach($book->genres as $genre)
+                                {{ $genre->name }} 
+                            @endforeach
+                        @endif
+                    </p>
 
-@else
+                </a>
 
-    <p class="empty-message">No results found.</p>
+            @endforeach
 
-@endif
+        @else
 
-</div>
+            <p class="empty-message">No results found.</p>
+
+        @endif
+
+    </div>
 
 </div>
 

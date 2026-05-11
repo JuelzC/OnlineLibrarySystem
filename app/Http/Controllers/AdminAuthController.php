@@ -29,7 +29,7 @@ class AdminAuthController extends Controller
         ]);
 
         DB::table('users')->insert([
-            'role_id' => 2,
+            'role_id' => 1,
             'fname' => $request->fname,
             'lname' => $request->lname,
             'email' => $request->email,

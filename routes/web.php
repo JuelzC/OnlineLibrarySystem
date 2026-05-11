@@ -17,6 +17,7 @@ use App\Http\Controllers\AdminHomePage;
 use App\Http\Controllers\FeaturedManga;
 use App\Http\Controllers\ChapterController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\AdminLogin;
 
 Route::get('/new-manga', [HomeController::class, 'newManga'])->name('new.manga');
 
@@ -116,4 +117,7 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('adm
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 Route::get('/admin/signup', [AdminAuthController::class, 'showSignup'])->name('signup');
 Route::post('/admin/signup', [AdminAuthController::class, 'signup'])->name('admin.signup.submit');
-Route::get('/admin_login', [AdminAuthController::class, 'showLogin'])->name('admin_login');
+Route::get('/admin_login', [AdminLogin::class, 'showLogin'])->name('admin_login');
+Route::get('/search', [BookController::class, 'search'])->name('search');
+Route::get('/admin/homepage', [AdminHomePage::class, 'show'])->name('admin.homepage');
+Route::post('/admin/login', [AdminLogin::class, 'login'])->name('admin.login.submit');

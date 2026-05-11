@@ -23,12 +23,13 @@
 }
 </style>
 @section('content')
-<div class = "title"> 
+
+<div class="card">
+    <div class = "title"> 
     <h1>Admin Login</h1>
 </div>
-<div class="card">
   
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('admin.login.submit') }}">
     @csrf
 
     <label>Email</label><br>
@@ -39,7 +40,7 @@
 
     <button type="submit" class="btn" style="width: 100%;">Login</button>
     </form>
-    <p class="newUser">Don't have an account? <a href="{{ route('admin_login') }}">Register here</a>.</p>
+    <p class="newUser">Don't have an account? <a href="{{ route('signup') }}">Register here</a>.</p>
 </div>
 
 

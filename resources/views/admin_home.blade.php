@@ -156,40 +156,6 @@ header {
 
     </div>
 </section>
-<section class="section">
-    <h2>New Chapters</h2>
-    <div class="card-container">
 
-        <?php
-        $newChapters = []; 
-
-        if (!empty($newChapters)) {
-            foreach ($newChapters as $chapter) {
-                echo "
-                <div class='card'>
-                    <img src='{$chapter['image']}' alt='Chapter'>
-                    <h3>{$chapter['title']}</h3>
-                </div>
-                ";
-            }
-        } else {
-            echo "<p class='empty-message'>No new chapters available.</p>";
-        }
-        ?>
-
-    </div>
-</section>
-
-<section class="section">
-    <h2>Quick Admin Access</h2>
-    <div class="card-container">
-
-        <a href="{{ route('admin.requests') }}" class="card">
-            <img src="{{ asset('images/admin-requests.jpg') }}" alt="Admin Requests">
-            <h3>Manage Requests</h3>
-        </a>
-
-    </div>
-</section>
 
 @endsection

@@ -9,9 +9,12 @@ class AdminApprovalController extends Controller
 {
     public function index()
     {
-        $pendingAdmins = Users::where('role_id', 2)
-            ->where('account_approval', false)
-            ->get();
+       $pendingAdmins = Users::where(function($query) {
+        $query->where('role_id', 1)
+              ->orWhere('role_id', 2);
+    })
+    ->where('account_approval', false)
+    ->get();
 
         return view('admin-approvals', compact('pendingAdmins'));
     }

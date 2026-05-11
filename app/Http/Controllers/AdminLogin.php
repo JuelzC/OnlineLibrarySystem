@@ -9,7 +9,7 @@ class AdminLogin extends Controller
 {
     public function showLogin()
     {
-        return view('/adminsignup');
+        return view('/admin_login');
     }
 
     public function login(Request $request)
@@ -23,7 +23,7 @@ class AdminLogin extends Controller
             $user = Auth::user();
 
             // Check if admin account is approved
-            if ($user->role_id == 2 && !$user->account_approval)
+            if ($user->role_id == 1 && !$user->account_approval)
             {
                 Auth::logout();
 
@@ -32,7 +32,7 @@ class AdminLogin extends Controller
                 ]);
             }
 
-            return redirect()->intended('/admin');
+            return redirect()->intended('/admin/homepage');
         }
 
         return back()->withErrors([
