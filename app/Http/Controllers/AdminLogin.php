@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class AdminLogin extends Controller
 {
-     public function showLogin()
+    public function showLogin()
     {
         return view('/adminsignup');
     }
@@ -16,8 +16,22 @@ class AdminLogin extends Controller
     {
         $credentials = $request->only('email', 'password');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials))
+        {
             $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            // Check if admin account is approved
+            if ($user->role_id == 2 && !$user->account_approval)
+            {
+                Auth::logout();
+
+                return back()->withErrors([
+                    'email' => 'Admin account is waiting for approval.',
+                ]);
+            }
+
             return redirect()->intended('/admin');
         }
 

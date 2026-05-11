@@ -55,6 +55,8 @@
     <button type="submit" class="btn" style="width: 100%;">Login</button>
     </form>
     <p class="newUser">Don't have an account? <a href="{{ route('register') }}">Register here</a></p>
+    <br>
+    <p class="newUser">Are you an Admin? <a href="{{ route('admin.login') }}">Admin Login</a></p>
 </div>
 
 

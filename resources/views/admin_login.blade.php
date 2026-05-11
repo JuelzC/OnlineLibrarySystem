@@ -1,5 +1,5 @@
-@extends('app')
 
+@extends('login')
 <style> 
 * {
     /* background-color: black; */
@@ -22,8 +22,9 @@
     color: crimson;
 }
 </style>
+@section('content')
 <div class = "title"> 
-    <h1> Login</h1>
+    <h1>Admin Login</h1>
 </div>
 <div class="card">
   
@@ -38,7 +39,7 @@
 
     <button type="submit" class="btn" style="width: 100%;">Login</button>
     </form>
-    <p class="newUser">Don't have an account? <a href="{{ route('admin') }}">Register here</a>.</p>
+    <p class="newUser">Don't have an account? <a href="{{ route('admin_login') }}">Register here</a>.</p>
 </div>
 
 

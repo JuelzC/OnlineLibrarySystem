@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\AdminApprovalController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
@@ -99,3 +99,21 @@ Route::get('/profile', [UserProfileController::class, 'userProfile'])
 
 Route::get('/chapters/latest', [ChapterController::class, 'latest'])
     ->name('chapters.latest');
+    
+Route::get('/admin/approvals', [AdminApprovalController::class, 'index'])
+    ->name('admin.approvals');
+
+
+Route::post('/admin/approve/{id}', [AdminApprovalController::class, 'approve'])
+    ->name('admin.approve');
+
+
+Route::post('/admin/reject/{id}', [AdminApprovalController::class, 'reject'])
+    ->name('admin.reject');
+
+Route::get('/admin/login', [AdminAuthController::class, 'showLogin'])->name('admin.login');
+
+Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+Route::get('/admin/signup', [AdminAuthController::class, 'showSignup'])->name('signup');
+Route::post('/admin/signup', [AdminAuthController::class, 'signup'])->name('admin.signup.submit');
+Route::get('/admin_login', [AdminAuthController::class, 'showLogin'])->name('admin_login');

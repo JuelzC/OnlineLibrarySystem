@@ -19,6 +19,7 @@ class Users extends Authenticatable
         'email',
         'password',
         'role_id',
+        'date_of_birth',
         'account_approval'
     ];
 
@@ -33,4 +34,8 @@ class Users extends Authenticatable
     ->withTimestamps()
     ->select('books.*');
 }
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }
