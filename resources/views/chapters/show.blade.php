@@ -4,13 +4,25 @@
 
 <div style="background:black; padding:20px; min-height:100vh;">
 
-    <h1 style="color:white; text-align:center; margin-bottom:20px;">
-        {{ $book->title }}
-        -
-        Chapter {{ $chapter->chapter_number }}
+    <h1 style="color:white; text-align:center; margin-bottom:10px;">
+        {{ $book->title }} - Chapter {{ $chapter->chapter_number }}
     </h1>
 
-    {{-- Navigation Buttons Top --}}
+    <div style="text-align:center; margin-bottom:20px;">
+        <a href="{{ route('manga.show', $book->book_id) }}"
+           style="
+                background:orangered;
+                color:white;
+                padding:10px 20px;
+                text-decoration:none;
+                border-radius:5px;
+                display:inline-block;
+                margin-bottom:10px;
+           ">
+            ← Back to Manga Page
+        </a>
+    </div>
+
     <div style="text-align:center; margin-bottom:30px;">
 
         @if($previousChapter)
@@ -19,7 +31,7 @@
                 'chapter' => $previousChapter->chapter_id
             ]) }}"
             style="
-                background:orangered;
+                background:crimson;
                 color:white;
                 padding:10px 20px;
                 text-decoration:none;
@@ -37,7 +49,7 @@
                 'chapter' => $nextChapter->chapter_id
             ]) }}"
             style="
-                background:#444;
+                background:crimson;
                 color:white;
                 padding:10px 20px;
                 text-decoration:none;
@@ -50,7 +62,6 @@
 
     </div>
 
-    {{-- Manga Pages --}}
     @foreach($pages as $page)
 
         <img
@@ -65,7 +76,6 @@
 
     @endforeach
 
-    {{-- Navigation Buttons Bottom --}}
     <div style="text-align:center; margin-top:30px;">
 
         @if($previousChapter)
@@ -74,7 +84,7 @@
                 'chapter' => $previousChapter->chapter_id
             ]) }}"
             style="
-                background:#444;
+                background:crimson;
                 color:white;
                 padding:10px 20px;
                 text-decoration:none;
@@ -92,7 +102,7 @@
                 'chapter' => $nextChapter->chapter_id
             ]) }}"
             style="
-                background:#444;
+                background:crimson;
                 color:white;
                 padding:10px 20px;
                 text-decoration:none;

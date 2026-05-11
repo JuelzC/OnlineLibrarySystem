@@ -1,3 +1,4 @@
+@extends('app')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,20 +83,8 @@
         }
     </style>
 </head>
-
+@section('content')
 <body>
-
-<header>
-    <div class="logo">Manga<span>Hub</span></div>
-
-    <nav>
-        <a href="/">Home</a>
-        <a href="/search">Search</a>
-        <a href="/request-manga">Request Manga</a>
-        <a href="/admin/requests">Admin</a>
-    </nav>
-</header>
-
 <div class="section">
 
     @if(session('success'))
@@ -146,4 +135,5 @@
 
 </div>
 </body>
+@endsection
 </html>

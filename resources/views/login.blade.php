@@ -22,6 +22,7 @@ body {
     font-size: 42px;
     color: crimson;
     letter-spacing: 2px;
+    padding-bottom: 30px;
 }
 
 /* Card */
@@ -111,13 +112,19 @@ body {
 .logo span {
     color: crimson;
 }
+.card {
+    background: #222;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 40px auto;
+}
 </style>
-
-<div class="title"> 
-    <h1>Login</h1>
-</div>
-
+@section('content')
 <div class="card">
+<div class = "title"> 
+    <h1> Login</h1>
+</div>
   
     <form method="POST" action="{{ route('login') }}">
     @csrf
@@ -133,7 +140,9 @@ body {
 
     <p class="newUser">
         Don't have an account? 
-        <a href="{{ route('register') }}">Register here</a>.
+        <a href="{{ route('register') }}">Register here</a> <br><br>
+        Don't have an account?
+        <a href="{{ route('admin_login') }}">Admin Login</a>
     </p>
 </div>
 

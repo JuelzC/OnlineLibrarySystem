@@ -1,11 +1,6 @@
 @extends('app')
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Request Manga</title>
-</head>
+
+@section('styles')
 <style>
     body {
         background-color: #111;
@@ -26,7 +21,7 @@
         margin-bottom: 20px;
     }
 
-    form {
+    .request-form {
         max-width: 600px;
         margin: 0 auto 50px auto;
         background: #1b1b1b;
@@ -51,6 +46,7 @@
         background: #222;
         color: white;
         font-size: 16px;
+        margin-bottom: 20px;
     }
 
     input[type="text"]:focus {
@@ -61,12 +57,13 @@
 
     button[type="submit"] {
         width: 100%;
+        height:40px;
         background: crimson;
         color: white;
         border: none;
         padding: 14px;
         border-radius: 8px;
-        font-size: 18px;
+        font-size: 16px;
         cursor: pointer;
         transition: 0.3s;
     }
@@ -78,37 +75,56 @@
     button[type="submit"]:active {
         transform: scale(0.97);
     }
+
+    .success-message {
+        text-align: center;
+        color: lightgreen;
+        margin-bottom: 20px;
+    }
+
+
+    .inline-form {
+        display: inline-flex;
+        margin: 0;
+        align-items: center;
+    }
+
+    .headerButtons {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logout-btn {
+        font: inherit;
+        cursor: pointer;
+        border: none;
+    }
 </style>
+@endsection
 
-<body>
-    <H1>Request a manga</H1>
-    @if(session('success'))
-    <p style = "color: green;">
-        {{ session ('success') }}
+@section('content')
 
+<h1>Request a Manga</h1>
+
+@if(session('success'))
+    <p class="success-message">
+        {{ session('success') }}
     </p>
-    @endif
-    <form method="POST" action="/request-manga">
-        @csrf
+@endif
 
-        <label>Manga Title</label>
-        <br>
-        <input type="text" name="title" required>
+<form class="request-form" method="POST" action="/request-manga">
+    @csrf
 
-        <br><br>
+    <label>Manga Title</label>
+    <input type="text" name="title" required>
 
-        <label>MyAnimeList Link</label>
-        <br>
-        <input type="text" name="mal_link" required>
+    <label>MyAnimeList Link</label>
+    <input type="text" name="mal_link" required>
 
-        <br><br>
+    <button type="submit">
+        Submit Request
+    </button>
+</form>
 
-        <button type="submit">
-            Submit Request
-        </button>
-
-    </form>
-    
-</body>
-</html>
 @endsection

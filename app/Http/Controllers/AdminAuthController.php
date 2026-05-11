@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminAuthController extends Controller
 {
+    public function showLogin()
+    {
+        return view('admin_login');
+    }
+
     public function showSignup()
     {
         return view('admin_signup');
@@ -24,7 +29,7 @@ class AdminAuthController extends Controller
         ]);
 
         DB::table('users')->insert([
-            'role_id' => 2, 
+            'role_id' => 1,
             'fname' => $request->fname,
             'lname' => $request->lname,
             'email' => $request->email,
@@ -33,7 +38,7 @@ class AdminAuthController extends Controller
             'account_approval' => 0
         ]);
 
-        return redirect()->route('admin.signup')
+        return redirect()->route('admin.login')
             ->with('success', 'Admin account created!');
     }
 }

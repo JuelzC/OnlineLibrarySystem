@@ -1,11 +1,13 @@
 @extends('app')
+
 <style>
     body {
         background-color: #111;
         color: white;
     }
 
-    form {
+    /* ONLY affects upload form, NOT logout or other forms */
+    .upload-form {
         max-width: 800px;
         margin: 40px auto;
         background: #1b1b1b;
@@ -80,7 +82,8 @@
 </style>
 
 @section('content')
-<form action="/admin/upload-manga" method="POST" enctype="multipart/form-data">
+
+<form class="upload-form" action="/admin/upload-manga" method="POST" enctype="multipart/form-data">
     @csrf
 
     <h3>Manga Info</h3>
@@ -107,10 +110,9 @@
     <h3>Chapter Pages</h3>
     <input type="file" name="pages[]" multiple required>
 
-
     <br><br>
 
     <button type="submit">Upload Chapter</button>
 </form>
 
-@endsection 
+@endsection

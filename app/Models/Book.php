@@ -31,4 +31,14 @@ class Book extends Model
     {
         return $this->hasMany(Chapter::class, 'book_id', 'book_id');
     }
+
+    public function bookmarkedBy()
+{
+    return $this->belongsToMany(
+        Users::class,
+        'bookmarks',
+        'book_id',
+        'user_id'
+    );
+}
 }

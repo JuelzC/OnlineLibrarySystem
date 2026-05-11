@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Users;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
     public function userProfile()
     {
-        return view('user-profile');
+        $user = Users::find(Auth::id());
+
+        $bookmarks = $user
+            ? $user->bookmarks()->latest()->get()
+            : collect();
+
+        return view('user-profile', compact('bookmarks'));
     }
 }

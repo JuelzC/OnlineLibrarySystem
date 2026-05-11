@@ -1,5 +1,5 @@
-@extends('app')
 
+@extends('login')
 <style> 
 * {
     /* background-color: black; */
@@ -22,12 +22,14 @@
     color: crimson;
 }
 </style>
-<div class = "title"> 
-    <h1> Login</h1>
-</div>
+@section('content')
+
 <div class="card">
+    <div class = "title"> 
+    <h1>Admin Login</h1>
+</div>
   
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ route('admin.login.submit') }}">
     @csrf
 
     <label>Email</label><br>
@@ -38,7 +40,7 @@
 
     <button type="submit" class="btn" style="width: 100%;">Login</button>
     </form>
-    <p class="newUser">Don't have an account? <a href="{{ route('admin') }}">Register here</a>.</p>
+    <p class="newUser">Don't have an account? <a href="{{ route('signup') }}">Register here</a>.</p>
 </div>
 
 
